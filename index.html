@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Будильник</title>
+    <link rel="stylesheet" href="style.css">
+    
+
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-bell"></i> Будильник</h1>
+            <div class="theme-toggle">
+        <label>
+            <input type="checkbox" id="theme-switch" />
+            Переключить тему
+        </label>
+    </div>
+            <div class="time-display">
+                <div id="current-time"></div>
+                <div id="next-alarm">Нет активных будильников</div>
+            </div>
+        </header>
+
+        <main>
+            <section class="alarm-form">
+                <h2><i class="fas fa-plus-circle"></i> Добавить новый будильник</h2>
+                <form id="add-alarm-form">
+                    <div class="form-group">
+                        <label for="alarm-name">Название:</label>
+                        <input type="text" id="alarm-name" placeholder="Утренний подъем" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="alarm-time">Время:</label>
+                        <input type="time" id="alarm-time" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" id="repeat-weekly"> Повторять еженедельно
+                        </label>
+                        <div class="days-container" id="days-container" style="display: none;">
+                            <label><input type="checkbox" name="day" value="0"> Пн</label>
+                            <label><input type="checkbox" name="day" value="1"> Вт</label>
+                            <label><input type="checkbox" name="day" value="2"> Ср</label>
+                            <label><input type="checkbox" name="day" value="3"> Чт</label>
+                            <label><input type="checkbox" name="day" value="4"> Пт</label>
+                            <label><input type="checkbox" name="day" value="5"> Сб</label>
+                            <label><input type="checkbox" name="day" value="6"> Вс</label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="alarm-sound">Мелодия:</label>
+                        <select id="alarm-sound">
+                            <option value="sound1">Lotus elise</option>
+                            <option value="sound2">Тревога</option>
+                            <option value="sound3">Marimba</option>
+                            <option value="sound4">Петух</option>
+                            <option value="sound5">Классика</option>
+                            <option value="sound6">Колокольчик</option>
+                            <option value="sound7">Утро начинается</option>
+                            <option value="sound8">Звон</option>
+                        </select>
+                    </div>
+                    
+                    <button type="submit" class="btn-add">Добавить будильник</button>
+                </form>
+            </section>
+            
+            <section class="alarms-list">
+                <h2><i class="fas fa-list"></i> Мои будильники</h2>
+                <div id="alarms-container">
+                    <!-- Будильники будут добавляться сюда -->
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Аудио элементы для будильников -->
+    <audio id="sound1" src="sounds/Lotus elise.mp3"></audio>
+    <audio id="sound2" src="sounds/mixkit-classic-alarm-995.wav"></audio>
+    <audio id="sound3" src="sounds/mixkit-marimba-ringtone-1359.wav"></audio>
+    <audio id="sound4" src="sounds/mixkit-rooster-crowing-in-the-morning-2462.wav"></audio>
+    <audio id="sound5" src="sounds/morning-alarm meloboom.mp3"></audio>
+    <audio id="sound6" src="sounds/krasivyj_budilnik_v2 meloboom.mp3"></audio>
+    <audio id="sound7" src="sounds/na_budilnik_utro_nachinaetsya meloboom.mp3"></audio>
+    <audio id="sound8" src="sounds/alarm-clock-5 meloboom.mp3"></audio>
+    <script src="script.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const switcher = document.getElementById('theme-switch');
+        const root = document.documentElement;
+
+        // Загружаем сохранённую тему
+        if (localStorage.getItem('theme') === 'tiffany') {
+            root.classList.add('theme-tiffany');
+            switcher.checked = true;
+        }
+
+        switcher.addEventListener('change', function () {
+            if (this.checked) {
+                root.classList.add('theme-tiffany');
+                localStorage.setItem('theme', 'tiffany');
+            } else {
+                root.classList.remove('theme-tiffany');
+                localStorage.setItem('theme', 'pink');
+            }
+        });
+    });
+    </script>
+</body>
+</html>
